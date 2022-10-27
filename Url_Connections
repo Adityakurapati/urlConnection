@@ -1,0 +1,30 @@
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
+import java.io.*;
+
+class Main {
+    public static void main(String a[]) throws UnknownHostException {
+        try {
+            URL url1 = new URL("http://www.internic.net");
+            URLConnection conn = url1.openConnection();
+            InputStream in = conn.getInputStream();
+            long d = conn.getDate();
+            if (d == 0) {
+                System.out.println("No data Found ");
+            } else {
+                System.out.println("Date: " + d);
+            }
+            System.out.println(conn.getContentType());
+            System.out.println(conn.getExpiration());
+
+            int i = conn.getContentLength();
+            while (i > 0) {
+                char c = (char) in.read();
+                System.out.println("" + c);
+            }
+        } catch (Exception e) {
+        }
+
+    }
+}
